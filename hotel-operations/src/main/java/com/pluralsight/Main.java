@@ -59,5 +59,18 @@ public class Main {
         employee2.punchTimeCard(13, 17);
         System.out.println("Hours Worked: " + employee2.getHoursWorked());
         System.out.println("Total Pay: $" + employee2.getTotalPay());
+
+        System.out.println();
+
+        Hotel hotel = new Hotel("Grand Hotel", 10, 50);
+        System.out.println("Available Suites: " + hotel.getAvailableSuites());
+        System.out.println("Available Rooms: " + hotel.getAvailableRooms());
+
+        boolean booked = hotel.bookRoom(3, true);
+        System.out.println("Booking Successful: " + booked);
+        System.out.println("Available Suites: " + hotel.getAvailableSuites());
+        booked = hotel.bookRoom(60, false);
+        System.out.println("Booking Successful: " + booked);
+        System.out.println("Available Rooms: " + hotel.getAvailableRooms());
     }
 }

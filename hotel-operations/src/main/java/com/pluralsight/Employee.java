@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Employee {
 
     private int employeeId;
@@ -9,6 +12,7 @@ public class Employee {
     private double hoursWorked;
     private double regularHours;
     private int startTime;
+    private LocalDateTime localStartTime;
 
     public Employee(int employeeId, String name, String department,
                     double payRate, double hoursWorked) {
@@ -87,4 +91,13 @@ public class Employee {
         hoursWorked += (endTime - startTime);
     }
 
+    public void punchIn() {
+        localStartTime = LocalDateTime.now();
+    }
+
+    public void punchOut() {
+        LocalDateTime endTime = LocalDateTime.now();
+        double hours = Duration.between(localStartTime, endTime).toMinutes() / 60.0;
+        hoursWorked += hours;
+    }
 }
