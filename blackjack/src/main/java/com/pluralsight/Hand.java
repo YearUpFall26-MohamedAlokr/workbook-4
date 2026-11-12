@@ -17,15 +17,48 @@ public class Hand {
         return cards.size();
     }
 
-    public int getValue(){
-        int value = 0;
+    public ArrayList<Card> getCards()
+    {
+        return cards;
+    }
 
-        for(Card card: cards){
-            card.flip(); // turn the card over to see the value
-            value += card.getPointValue();
-            card.flip(); // hide the card again
+    public int getValue(){
+        int total = 0;
+        int aceCount = 0;
+
+        for(Card card : cards)
+        {
+            if(!card.isFaceUp())
+            {
+                card.flip();
+            }
+
+            total += card.getPointValue();
+
+            if(card.getValue().equalsIgnoreCase("A"))
+            {
+                aceCount++;
+            }
+        }
+        //Here We handel the Ace to avoid bust
+        while(total > 21 && aceCount > 0)
+        {
+            total -= 10;
+            aceCount--;
         }
 
-        return value;
+        return total;
+    }
+
+    public void displayHand() {
+        for(Card card : cards)
+        {
+            if(!card.isFaceUp())
+            {
+                card.flip();
+            }
+
+            System.out.println(card.getValue() +" of "+ card.getSuit());
+        }
     }
 }
